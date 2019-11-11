@@ -11,19 +11,18 @@ password = "feedforward"
 
 
 def main():
+    # Enables browser logging
 	d = DesiredCapabilities.CHROME
 	d['goog:loggingPrefs'] = {'browser': 'ALL'}
+
 	browser = webdriver.Chrome(get_chromedriver_path(), desired_capabilities=d)
 	open_pokemon_showdown(browser)
-	# cookies = pickle.load(open("cookies.pkl", "rb"))
-	# for cookie in cookies:
-	# 	browser.add_cookie(cookie)
 	login(browser, username, password)
 	play_game(browser)
-	test_create_team(browser)
+	create_team(browser)
+    # prints browser log
 	for entry in browser.get_log('browser'):
 		print(entry)
-	# pickle.dump(browser.get_cookies(), open("cookies.pkl", "wb"))
 
 
 def get_chromedriver_path():
@@ -64,9 +63,8 @@ def login(browser, username, password):
 	browser.find_element_by_name("password").send_keys(Keys.RETURN)
 	time.sleep(1)
 
-
-def test_create_team(driver):
-	# driver.get("https://play.pokemonshowdown.com/")
+# Creates pokemon team and starts battle
+def create_team(driver):
 	driver.find_element_by_name("joinRoom").click()
 	driver.find_element_by_name("newTop").click()
 	driver.find_element_by_xpath(
@@ -101,13 +99,11 @@ def test_create_team(driver):
 	# driver.find_element_by_xpath(
 	# 	"(.//*[normalize-space(text()) and normalize-space(.)='Dragon'])[1]/following::button[1]").click()
 
-# def create_team(browser):
-
 def play_game(browser):
 	browser.find_element_by_xpath("//*[@id=\"room-\"]/div/div[1]/div[2]/div[1]/form/p[1]/button").click() # select battle type
 	time.sleep(2)
 	browser.find_element_by_xpath("/html/body/div[4]/ul[1]/li[14]/button").click() # choose 1v1
-	time.sleep(5)
+	time.sleep(2)
 
 
 main()
