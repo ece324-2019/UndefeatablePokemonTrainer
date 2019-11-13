@@ -19,7 +19,7 @@ spa = []
 spd = []
 spe = []
 type1 = []
-type2 = [None for i in range(1068)]
+type2 = [None for i in range(995)]
 
 k = 0
 for i in types:
@@ -48,7 +48,7 @@ for i in baseStats:
 			spd.append(int(i[j].replace(" spd: ", "")))
 		elif i[j].startswith(" spe"):
 			spe.append(int(i[j].replace(" spe: ", "").replace("}", "")))
-csvData = [[hp[i], atk[i], defe[i], spa[i], spd[i], spe[i], type1[i], type2[i]]for i in range(1068)]
+csvData = [[hp[i], atk[i], defe[i], spa[i], spd[i], spe[i], type1[i], type2[i]]for i in range(len(hp))]
 with open('pokedex.csv', 'w') as csvFile:
 	writer = csv.writer(csvFile)
 	writer.writerows(csvData)
