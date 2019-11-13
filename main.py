@@ -40,7 +40,7 @@ def main():
 			continue
 
 		# Makes desired move
-		make_move(browser, "blah")
+		make_move(browser, "Superpower")
 	print ("done")
 
     # prints browser log
@@ -107,12 +107,19 @@ def start_battle(driver):
 		time.sleep(1)
 	driver.find_element_by_name("chooseTeamPreview").click()
 
-# TODO: Add other three moves
 # Makes the desired move
 def make_move(driver, move):
-	# Read log for when choose move
-	driver.find_element_by_name("chooseMove").click()
-	time.sleep(1)
+    if move == "Outrage":
+        driver.find_element_by_name("chooseMove").click()
+    elif move == "Iron Tail":
+        driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='Dragon'])[1]/following::button[1]").click()
+    elif move == "Rock Slide":
+        driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='Steel'])[1]/following::button[1]").click()
+    elif move == "Superpower":
+        driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='Rock'])[1]/following::button[1]").click()
+    else:
+        print ("Invalid Move!")
+    time.sleep(1)
 
 def play_game(browser):
 	browser.find_element_by_xpath("//*[@id=\"room-\"]/div/div[1]/div[2]/div[1]/form/p[1]/button").click() # select battle type
