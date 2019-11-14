@@ -23,15 +23,12 @@ def calc_type_eff(my_type1, my_type2, move_type, opp_type1, opp_type2):
 		type_eff *= 1.5
 	return type_eff
 
-<<<<<<< HEAD
 def get_dataframe():
-	return pd.read_csv("pokedex.csv", header=None, names=['hp', 'atk', 'def', 'spa', 'spd', 'spe', 'type1', 'type2'])
+	return pd.read_csv("pokedex.csv", header=None, names=['species', 'hp', 'atk', 'def', 'spa', 'spd', 'spe', 'type1', 'type2'])
 
 pokedex = get_dataframe()
 print(pokedex)
-=======
-pokedex = pd.read_csv("pokedex.csv", header=None, names=['species', 'hp', 'atk', 'def', 'spa', 'spd', 'spe', 'type1', 'type2'])
->>>>>>> 7b5d13a10e1fe6558f5fbf6acaff416aef8579b1
+
 pokedex = pokedex.where((pd.notnull(pokedex)), None)
 type_chart = pd.read_csv("data/chart.csv", index_col=0)
 move = [None for i in range(len(pokedex.index))]
@@ -53,10 +50,7 @@ pokedex = pokedex.set_index('species')
 pokedex["Move"] = move
 print(pokedex.to_string())
 
-<<<<<<< HEAD
-print(pokedex.loc['Bulbasaur'])
-=======
 #print(pokedex.loc[[haxorus.num]])'''
->>>>>>> 7b5d13a10e1fe6558f5fbf6acaff416aef8579b1
+
 
 
