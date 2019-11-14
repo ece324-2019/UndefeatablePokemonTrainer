@@ -24,7 +24,11 @@ def calc_type_eff(my_type1, my_type2, move_type, opp_type1, opp_type2):
 		type_eff *= 1.5
 	return type_eff
 
-pokedex = pd.read_csv("pokedex.csv", header=None, names=['hp', 'atk', 'def', 'spa', 'spd', 'spe', 'type1', 'type2'])
+def get_dataframe():
+	return pd.read_csv("pokedex.csv", header=None, names=['hp', 'atk', 'def', 'spa', 'spd', 'spe', 'type1', 'type2'])
+
+pokedex = get_dataframe()
+print(pokedex)
 pokedex = pokedex.where((pd.notnull(pokedex)), None)
 
 #pokedex['type2'] = pokedex['type2'].apply(lambda x: None if np.isnan(x) else x)
@@ -48,6 +52,6 @@ for i in range(len(pokedex.index)):
 pokedex["Move"] = move
 print(pokedex.to_string())
 
-#print(pokedex.loc[[haxorus.num]])
+print(pokedex.loc['Bulbasaur'])
 
 
