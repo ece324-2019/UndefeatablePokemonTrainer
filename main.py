@@ -5,6 +5,7 @@ import pickle
 import time
 import os
 import getpass
+import read_pokedex
 
 username = "UndefeatableNN"
 password = "feedforward"
@@ -34,6 +35,9 @@ def get_opp_pokemon(logs):
 # TODO: Start timer every battle
 # clear console and read it periodically to see if repeat
 def main():
+	pokedex = read_pokedex.get_dataframe()
+	pokedex = pokedex.set_index('species')
+
     # Enables browser logging
 	d = DesiredCapabilities.CHROME
 	d['goog:loggingPrefs'] = {'browser': 'ALL'}
@@ -57,6 +61,7 @@ def main():
 			opponent = get_opp_pokemon(logs)
 			if opponent:
 				print ("opponent is ", opponent)
+				print (pokedex.loc[opponent])
 			continue
 
 		# Wait for chooseMove to come up

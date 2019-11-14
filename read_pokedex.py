@@ -26,31 +26,29 @@ def calc_type_eff(my_type1, my_type2, move_type, opp_type1, opp_type2):
 def get_dataframe():
 	return pd.read_csv("pokedex.csv", header=None, names=['species', 'hp', 'atk', 'def', 'spa', 'spd', 'spe', 'type1', 'type2'])
 
-pokedex = get_dataframe()
-print(pokedex)
+if __name__ == "__main__":
+	pokedex = get_dataframe()
+	print(pokedex)
 
-pokedex = pokedex.where((pd.notnull(pokedex)), None)
-type_chart = pd.read_csv("data/chart.csv", index_col=0)
-move = [None for i in range(len(pokedex.index))]
+	pokedex = pokedex.where((pd.notnull(pokedex)), None)
+	type_chart = pd.read_csv("data/chart.csv", index_col=0)
+	move = [None for i in range(len(pokedex.index))]
 
-for i in range(len(pokedex.index)):
-	move[i] = haxorus.moves[np.argmax([
-	calc_damage(haxorus.moves_damage[0], haxorus.atk, pokedex.loc[i,'def'], haxorus.moves_type[0], haxorus.type1,
-				haxorus.type2, pokedex.loc[i,'type1'], pokedex.loc[i,'type2']),
-	calc_damage(haxorus.moves_damage[1], haxorus.atk, pokedex.loc[i,'def'], haxorus.moves_type[1], haxorus.type1,
-				haxorus.type2, pokedex.loc[i,'type1'], pokedex.loc[i,'type2']),
-	calc_damage(haxorus.moves_damage[2], haxorus.atk, pokedex.loc[i,'def'], haxorus.moves_type[2], haxorus.type1,
-				haxorus.type2, pokedex.loc[i,'type1'], pokedex.loc[i,'type2']),
-	calc_damage(haxorus.moves_damage[3], haxorus.atk, pokedex.loc[i,'def'], haxorus.moves_type[3], haxorus.type1,
-				haxorus.type2, pokedex.loc[i,'type1'], pokedex.loc[i,'type2'])
-		])]
+	for i in range(len(pokedex.index)):
+		move[i] = haxorus.moves[np.argmax([
+		calc_damage(haxorus.moves_damage[0], haxorus.atk, pokedex.loc[i,'def'], haxorus.moves_type[0], haxorus.type1,
+					haxorus.type2, pokedex.loc[i,'type1'], pokedex.loc[i,'type2']),
+		calc_damage(haxorus.moves_damage[1], haxorus.atk, pokedex.loc[i,'def'], haxorus.moves_type[1], haxorus.type1,
+					haxorus.type2, pokedex.loc[i,'type1'], pokedex.loc[i,'type2']),
+		calc_damage(haxorus.moves_damage[2], haxorus.atk, pokedex.loc[i,'def'], haxorus.moves_type[2], haxorus.type1,
+					haxorus.type2, pokedex.loc[i,'type1'], pokedex.loc[i,'type2']),
+		calc_damage(haxorus.moves_damage[3], haxorus.atk, pokedex.loc[i,'def'], haxorus.moves_type[3], haxorus.type1,
+					haxorus.type2, pokedex.loc[i,'type1'], pokedex.loc[i,'type2'])
+			])]
 
-pokedex = pokedex.set_index('species')
-#pokedex = pd.read_csv("pokedex.csv", header=None, names=['hp', 'atk', 'def', 'spa', 'spd', 'spe', 'type1', 'type2'])
-pokedex["Move"] = move
-print(pokedex.to_string())
-
-#print(pokedex.loc[[haxorus.num]])'''
-
-
-
+	pokedex = pokedex.set_index('species')
+	#pokedex = pd.read_csv("pokedex.csv", header=None, names=['hp', 'atk', 'def', 'spa', 'spd', 'spe', 'type1', 'type2'])
+	pokedex["Move"] = move
+	print(pokedex.to_string())
+	x = 'Zygarde'
+	print (pokedex.loc[x])
