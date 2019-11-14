@@ -10,11 +10,25 @@ username = "UndefeatableNN"
 password = "feedforward"
 
 # Looks for word in logs
+# Inputs: logs (list of dictionaries)
+#		  word (str)
 def find_in_log(logs, word):
 	for log in logs:
 		# print (log)
 		if word in log["message"]:
 			return 1
+	return 0
+
+# Gets opponent's pokemon name
+def get_opp_pokemon(logs):
+	for log in logs:
+		if find_in_log([log], "p2a"):
+			opp = log["message"].split('\\n')[4].split('|')[3].split(',')[0]
+			# If p1 is opponent
+			if opp != "Haxorus":
+				return opp
+			# p2 is opponent
+			return log["message"].split('\\n')[5].split('|')[3].split(',')[0]
 	return 0
 
 # TODO: Start timer every battle
@@ -31,8 +45,19 @@ def main():
 	create_team(browser)
 	start_battle(browser)
 
+	opponent = 0
 	# while battle has not ended
 	while (not browser.find_elements_by_name("closeAndMainMenu")):
+
+		if (not opponent):
+			time.sleep(1)
+			logs = browser.get_log('browser')
+
+			# Finds opponent's pokemon
+			opponent = get_opp_pokemon(logs)
+			if opponent:
+				print ("opponent is ", opponent)
+			continue
 
 		# Wait for chooseMove to come up
 		if (browser.find_elements_by_name("chooseMove") == []):
@@ -40,8 +65,9 @@ def main():
 			continue
 
 		# Makes desired move
-		make_move(browser, "Superpower")
-	print ("done")
+		make_move(browser, "Outrage")
+
+	# print ("done")
 
     # prints browser log
 	# for entry in browser.get_log('browser'):
