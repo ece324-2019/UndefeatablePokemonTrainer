@@ -2,7 +2,6 @@ import pandas as pd
 import numpy as np
 
 class haxorus:
-	num = 731
 	moves = ['Outrage', 'Iron Tail', 'Rock Slide', 'Superpower']
 	moves_type = ['Dragon', 'Steel', 'Rock', 'Fighting']
 	moves_damage = [120, 100, 75, 120]
@@ -24,16 +23,16 @@ def calc_type_eff(my_type1, my_type2, move_type, opp_type1, opp_type2):
 		type_eff *= 1.5
 	return type_eff
 
+<<<<<<< HEAD
 def get_dataframe():
 	return pd.read_csv("pokedex.csv", header=None, names=['hp', 'atk', 'def', 'spa', 'spd', 'spe', 'type1', 'type2'])
 
 pokedex = get_dataframe()
 print(pokedex)
+=======
+pokedex = pd.read_csv("pokedex.csv", header=None, names=['species', 'hp', 'atk', 'def', 'spa', 'spd', 'spe', 'type1', 'type2'])
+>>>>>>> 7b5d13a10e1fe6558f5fbf6acaff416aef8579b1
 pokedex = pokedex.where((pd.notnull(pokedex)), None)
-
-#pokedex['type2'] = pokedex['type2'].apply(lambda x: None if np.isnan(x) else x)
-
-#print(pokedex)
 type_chart = pd.read_csv("data/chart.csv", index_col=0)
 move = [None for i in range(len(pokedex.index))]
 
@@ -49,9 +48,15 @@ for i in range(len(pokedex.index)):
 				haxorus.type2, pokedex.loc[i,'type1'], pokedex.loc[i,'type2'])
 		])]
 
+pokedex = pokedex.set_index('species')
+#pokedex = pd.read_csv("pokedex.csv", header=None, names=['hp', 'atk', 'def', 'spa', 'spd', 'spe', 'type1', 'type2'])
 pokedex["Move"] = move
 print(pokedex.to_string())
 
+<<<<<<< HEAD
 print(pokedex.loc['Bulbasaur'])
+=======
+#print(pokedex.loc[[haxorus.num]])'''
+>>>>>>> 7b5d13a10e1fe6558f5fbf6acaff416aef8579b1
 
 
