@@ -8,8 +8,9 @@ import getpass
 import read_pokedex
 import train
 import torch
+import numpy as np
 
-username = "UndefeatableNN"
+username = "UndefeatableNNBase"
 password = "feedforward"
 
 # Looks for word in logs
@@ -37,6 +38,10 @@ def get_opp_pokemon(logs):
 # TODO: Start timer every battle
 # clear console and read it periodically to see if repeat
 def main():
+	f = open(username + '.csv', 'a')
+	f.write("\nBattle, Opponent, Move\n")
+	f.close()
+
 	moves = ['Outrage', 'Iron Tail', 'Rock Slide', 'Superpower']
 	pokedex = read_pokedex.get_dataframe()
 	# pokedex = pokedex.set_index('species')
@@ -53,7 +58,11 @@ def main():
 	create_team(browser)
 
 
-	for i in range(1):
+	for i in range(30):
+		f = open(username + '.csv', 'a')
+		f.write(str(i) + ',')
+		f.close()
+		print ("Battle", i)
 		start_battle(browser)
 		opponent = 0
 		# while battle has not ended
@@ -67,8 +76,16 @@ def main():
 				opponent = get_opp_pokemon(logs)
 				if opponent:
 					print ("opponent is ", opponent)
-					input = torch.from_numpy(read_pokedex.inputize_data(pokedex.loc[pokedex['species']==opponent].index.values[0]))
-					move = moves[torch.argmax(model(input.float()))]
+					f = open(username + '.csv', 'a')
+					f.write(opponent + ',')
+					f.close()
+					input = torch.from_numpy(np.expand_dims(read_pokedex.inputize_data(pokedex.loc[pokedex['species']==opponent].index.values[0]), axis=0))
+					print (input)
+					# print ("index", read_pokedex.inputize_data(pokedex.loc[pokedex['species']==opponent].index.values[0]))
+					output = model(input.float())
+					move_index = torch.argmax(output)
+					print(output)
+					move = moves[move_index]
 				continue
 
 			# Wait for chooseMove to come up
@@ -77,11 +94,18 @@ def main():
 				continue
 
 			# Makes desired move
+			print ("move", move)
+			f = open(username + '.csv', 'a')
+			f.write(move + ',')
+			f.close()
 			make_move(browser, move)
 
 		# Go back to main menu
 		browser.find_element_by_name("closeAndMainMenu").click()
 		logs = browser.get_log('browser')
+		f = open(username + '.csv', 'a')
+		f.write('\n')
+		f.close()
 
 		# print ("done")
 
@@ -143,6 +167,7 @@ def start_battle(driver):
 	driver.find_element_by_name("format").click()
 	driver.find_element_by_xpath(
 		"(.//*[normalize-space(text()) and normalize-space(.)='Anything Goes'])[2]/following::button[1]").click()
+	time.sleep(1)
 	driver.find_element_by_xpath(
 		"(.//*[normalize-space(text()) and normalize-space(.)='wobbuffet'])[1]/following::strong[1]").click()
 	while(driver.find_elements_by_name("chooseTeamPreview") == []):
