@@ -48,12 +48,18 @@ def get_labelled_dataframe():
 	pokedex["move"] = move
 	return pokedex
 
-
+stats_data_mean = 0
+stats_data_std = 0
+data = []
 def get_data():
+	global stats_data_mean
+	global stats_data_std
 	pokedex = get_labelled_dataframe()
 	list_of_stats = ['hp', 'atk', 'def', 'spa', 'spd', 'spe']
 	stats_data = pokedex[list_of_stats] # extract continuous features into a separate variable
-	stats_data = (stats_data - stats_data.mean()) / stats_data.std() # normalize the features
+	stats_data_mean = stats_data.mean()
+	stats_data_std = stats_data.std()
+	stats_data = (stats_data - stats_data_mean) / stats_data_std # normalize the features
 	#print(stats_data.head())
 	stats = stats_data.to_numpy() # convert to numpy array
 	#print(continuous_arr.shape)
@@ -62,16 +68,25 @@ def get_data():
 	label_encoder = LabelEncoder()
 	list_of_categories = ['type1', 'type2', 'move']
 	categorical_data = pokedex[list_of_categories] # extract categorical features into a separate variable
-	#print(types)
+
 	categorical_data = categorical_data.apply(label_encoder.fit_transform) # transform features into integers
 	oneh_encoder = OneHotEncoder(categories='auto', sparse=False)
 	moves = oneh_encoder.fit_transform(categorical_data[['move']])
-	#print(moves)
+	# print(moves)
 	types = categorical_data[['type1', 'type2']]
+	# print(types)
 	one_hot_types = oneh_encoder.fit_transform(types)
+	global data
 	data = np.concatenate([one_hot_types, stats], axis=1)
 	return data, moves
 
+def inputize_data(position):
+	global data
+	return (data[position])
+
 get_data()
-
-
+# print(data[0])
+pokedex = get_dataframe()
+# pokedex = pokedex.set_index('species')
+# print (pokedex.loc[pokedex['species']=='Haxorus'].index.values[0])
+# print (stats_data_std)

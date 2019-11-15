@@ -9,6 +9,7 @@ from torch.utils.data import DataLoader
 from models import MultiLayerPerceptron
 import argparse
 
+import read_pokedex
 
 def plot_over_acc(over_acc, steps):
     plt.figure()
@@ -44,43 +45,51 @@ parser.add_argument('--num_filt', type=int, default=50)
 
 args = parser.parse_args()
 
-# Load the data
+def get_model():
 
-training_data, training_labels = get_data()
-train_dataset = TurnDataset(training_data, training_labels)
-train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True)
+    # Load the data
 
-model = MultiLayerPerceptron(args.input_size, args.hidden_dim, args.output_size)
-criterion = torch.nn.MSELoss()
-optimizer = torch.optim.SGD(model.parameters(), lr=args.lr)
+    training_data, training_labels = get_data()
+    train_dataset = TurnDataset(training_data, training_labels)
+    train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True)
 
-train_loss = []
-train_acc = []
+    model = MultiLayerPerceptron(args.input_size, args.hidden_dim, args.output_size)
+    criterion = torch.nn.MSELoss()
+    optimizer = torch.optim.SGD(model.parameters(), lr=args.lr)
 
-steps = [i for i in range(args.epochs)]
-sig = nn.Sigmoid()
+    train_loss = []
+    train_acc = []
 
-for epoch in range(args.epochs):
-    running_loss = 0.0
-    running_acc = 0.0
-    running_count = 0.0
-    for i, batch in enumerate(train_loader, 0):
-        feats, labels = batch
-        optimizer.zero_grad()
-        outputs = model(feats.float())
-        loss = criterion(input=outputs.squeeze(), target=labels.float())
-        loss.backward()
-        optimizer.step()
-        running_loss += loss.item()
-        running_acc += find_acc(outputs, labels)
-        running_count += len(labels)
-    train_loss.append(running_loss)
-    train_acc.append(running_acc/running_count)
-print('Finished Training')
-plot_over_acc(train_acc, steps)
-plot_over_loss(train_loss, steps)
+    steps = [i for i in range(args.epochs)]
+    sig = nn.Sigmoid()
 
+    for epoch in range(args.epochs):
+        running_loss = 0.0
+        running_acc = 0.0
+        running_count = 0.0
+        for i, batch in enumerate(train_loader, 0):
+            feats, labels = batch
+            optimizer.zero_grad()
+            outputs = model(feats.float())
+            loss = criterion(input=outputs.squeeze(), target=labels.float())
+            loss.backward()
+            optimizer.step()
+            running_loss += loss.item()
+            running_acc += find_acc(outputs, labels)
+            running_count += len(labels)
+        train_loss.append(running_loss)
+        train_acc.append(running_acc/running_count)
+    print('Finished Training')
+    # plot_over_acc(train_acc, steps)
+    # plot_over_loss(train_loss, steps)
+    return model
 
-
-
-
+if __name__ == "__main__":
+    model = get_model()
+    pokedex = read_pokedex.get_dataframe()
+    input = torch.from_numpy(read_pokedex.inputize_data(pokedex.loc[pokedex['species'] == 'Haxorus'].index.values[0]))
+    print ("input", input)
+    move = model(input.float())
+    print(move)
+    moves = ['1', '2', '3', '4']
+    print(moves[torch.argmax(model(input.float()))])

@@ -6,6 +6,8 @@ import time
 import os
 import getpass
 import read_pokedex
+import train
+import torch
 
 username = "UndefeatableNN"
 password = "feedforward"
@@ -35,8 +37,10 @@ def get_opp_pokemon(logs):
 # TODO: Start timer every battle
 # clear console and read it periodically to see if repeat
 def main():
+	moves = ['Outrage', 'Iron Tail', 'Rock Slide', 'Superpower']
 	pokedex = read_pokedex.get_dataframe()
-	pokedex = pokedex.set_index('species')
+	# pokedex = pokedex.set_index('species')
+	model = train.get_model()
 
     # Enables browser logging
 	d = DesiredCapabilities.CHROME
@@ -47,36 +51,43 @@ def main():
 	login(browser, username, password)
 	play_game(browser)
 	create_team(browser)
-	start_battle(browser)
 
-	opponent = 0
-	# while battle has not ended
-	while (not browser.find_elements_by_name("closeAndMainMenu")):
 
-		if (not opponent):
-			time.sleep(1)
-			logs = browser.get_log('browser')
+	for i in range(1):
+		start_battle(browser)
+		opponent = 0
+		# while battle has not ended
+		while (not browser.find_elements_by_name("closeAndMainMenu")):
 
-			# Finds opponent's pokemon
-			opponent = get_opp_pokemon(logs)
-			if opponent:
-				print ("opponent is ", opponent)
-				print (pokedex.loc[opponent])
-			continue
+			if (not opponent):
+				time.sleep(1)
+				logs = browser.get_log('browser')
 
-		# Wait for chooseMove to come up
-		if (browser.find_elements_by_name("chooseMove") == []):
-			time.sleep(1)
-			continue
+				# Finds opponent's pokemon
+				opponent = get_opp_pokemon(logs)
+				if opponent:
+					print ("opponent is ", opponent)
+					input = torch.from_numpy(read_pokedex.inputize_data(pokedex.loc[pokedex['species']==opponent].index.values[0]))
+					move = moves[torch.argmax(model(input.float()))]
+				continue
 
-		# Makes desired move
-		make_move(browser, "Outrage")
+			# Wait for chooseMove to come up
+			if (browser.find_elements_by_name("chooseMove") == []):
+				time.sleep(1)
+				continue
 
-	# print ("done")
+			# Makes desired move
+			make_move(browser, move)
 
-    # prints browser log
-	# for entry in browser.get_log('browser'):
-	# 	print(entry)
+		# Go back to main menu
+		browser.find_element_by_name("closeAndMainMenu").click()
+		logs = browser.get_log('browser')
+
+		# print ("done")
+
+		# prints browser log
+		# for entry in browser.get_log('browser'):
+		# 	print(entry)
 
 
 def get_chromedriver_path():
