@@ -10,7 +10,7 @@ import train
 import torch
 import numpy as np
 
-username = "UndefeatableNNBase"
+username = "UndefeatableNNB2"
 password = "feedforward"
 
 # Looks for word in logs
@@ -42,7 +42,7 @@ def main():
 	f.write("\nBattle, Opponent, Move\n")
 	f.close()
 
-	moves = ['Outrage', 'Iron Tail', 'Rock Slide', 'Superpower']
+	moves = ['Iron Tail', 'Outrage', 'Rock Slide', 'Superpower']
 	pokedex = read_pokedex.get_dataframe()
 	# pokedex = pokedex.set_index('species')
 	model = train.get_model()
