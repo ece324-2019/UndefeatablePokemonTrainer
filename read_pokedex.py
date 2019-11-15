@@ -64,16 +64,14 @@ def get_data():
 	categorical_data = pokedex[list_of_categories] # extract categorical features into a separate variable
 	#print(types)
 	categorical_data = categorical_data.apply(label_encoder.fit_transform) # transform features into integers
-	moves = categorical_data['move']
-	#print(moves)
-	moves_arr = moves.to_numpy()
-	types = categorical_data[['type1', 'type2']]
 	oneh_encoder = OneHotEncoder(categories='auto', sparse=False)
+	moves = oneh_encoder.fit_transform(categorical_data[['move']])
+	#print(moves)
+	types = categorical_data[['type1', 'type2']]
 	one_hot_types = oneh_encoder.fit_transform(types)
-	#print(one_hot_types)
 	data = np.concatenate([one_hot_types, stats], axis=1)
-	print(data.shape)
-	print(moves_arr.shape)
-	return data, moves_arr
+	return data, moves
+
+get_data()
 
 
