@@ -9,6 +9,7 @@ import read_pokedex
 import train
 import torch
 import numpy as np
+import random
 
 username = "UndefeatableNNB2"
 password = "feedforward"
@@ -35,7 +36,21 @@ def get_opp_pokemon(logs):
 			return log["message"].split('\\n')[5].split('|')[3].split(',')[0]
 	return 0
 
+def get_win_loss(logs):
+	for log in logs:
+		if find_in_log([log], "win"):
+			# print("found!")
+			print (log)
+			# print (log["message"].split('\\n')[-2])
+			if log["message"].split('\\n')[-2].split('|')[-1] == username:
+				return "win"
+			else:
+				return "loss"
+	print("Not found!")
+	print(logs)
+
 # TODO: Start timer every battle
+# TODO: Add win/loss data
 # clear console and read it periodically to see if repeat
 def main():
 	f = open(username + '.csv', 'a')
@@ -45,7 +60,8 @@ def main():
 	moves = ['Iron Tail', 'Outrage', 'Rock Slide', 'Superpower']
 	pokedex = read_pokedex.get_dataframe()
 	# pokedex = pokedex.set_index('species')
-	model = train.get_model()
+	# model = train.get_model()
+	model = torch.load('overfit.pt')
 
     # Enables browser logging
 	d = DesiredCapabilities.CHROME
@@ -58,7 +74,7 @@ def main():
 	create_team(browser)
 
 
-	for i in range(30):
+	for i in range(2):
 		f = open(username + '.csv', 'a')
 		f.write(str(i) + ',')
 		f.close()
@@ -86,6 +102,7 @@ def main():
 					move_index = torch.argmax(output)
 					print(output)
 					move = moves[move_index]
+					# move = random.choice(moves) # For random moves
 				continue
 
 			# Wait for chooseMove to come up
@@ -94,6 +111,7 @@ def main():
 				continue
 
 			# Makes desired move
+			time.sleep(0.5)
 			print ("move", move)
 			f = open(username + '.csv', 'a')
 			f.write(move + ',')
@@ -102,8 +120,13 @@ def main():
 
 		# Go back to main menu
 		browser.find_element_by_name("closeAndMainMenu").click()
+
+		# Gets win or loss
 		logs = browser.get_log('browser')
+		win_loss = get_win_loss(logs)
+
 		f = open(username + '.csv', 'a')
+		f.write(win_loss)
 		f.write('\n')
 		f.close()
 
