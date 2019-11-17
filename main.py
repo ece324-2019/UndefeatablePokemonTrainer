@@ -48,9 +48,9 @@ def get_win_loss(logs):
 				return "loss"
 	print("Not found!")
 	print(logs)
+	return "N/A"
 
 # TODO: Start timer every battle
-# TODO: Add win/loss data
 # clear console and read it periodically to see if repeat
 def main():
 	f = open(username + '.csv', 'a')
@@ -68,13 +68,17 @@ def main():
 	d['goog:loggingPrefs'] = {'browser': 'ALL'}
 
 	browser = webdriver.Chrome(get_chromedriver_path(), desired_capabilities=d)
+
+	# Increase time browser waits implicitly for element
+	browser.implicitly_wait(5)
+
 	open_pokemon_showdown(browser)
 	login(browser, username, password)
 	play_game(browser)
 	create_team(browser)
 
 
-	for i in range(2):
+	for i in range(100):
 		f = open(username + '.csv', 'a')
 		f.write(str(i) + ',')
 		f.close()
@@ -119,7 +123,16 @@ def main():
 			make_move(browser, move)
 
 		# Go back to main menu
-		browser.find_element_by_name("closeAndMainMenu").click()
+		time.sleep(1)
+		while(1):
+			try:
+				browser.find_element_by_name("closeAndMainMenu").click()
+			except:
+				print ("Failed to click closeAndMainMenu. Try again")
+				time.sleep(1)
+			else:
+				break
+
 
 		# Gets win or loss
 		logs = browser.get_log('browser')
@@ -199,17 +212,21 @@ def start_battle(driver):
 
 # Makes the desired move
 def make_move(driver, move):
-    if move == "Outrage":
-        driver.find_element_by_name("chooseMove").click()
-    elif move == "Iron Tail":
-        driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='Dragon'])[1]/following::button[1]").click()
-    elif move == "Rock Slide":
-        driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='Steel'])[1]/following::button[1]").click()
-    elif move == "Superpower":
-        driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='Rock'])[1]/following::button[1]").click()
-    else:
-        print ("Invalid Move!")
-    time.sleep(1)
+	# If have no pp, goes through except
+	try:
+		if move == "Outrage":
+			driver.find_element_by_name("chooseMove").click()
+		elif move == "Iron Tail":
+			driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='Dragon'])[1]/following::button[1]").click()
+		elif move == "Rock Slide":
+			driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='Steel'])[1]/following::button[1]").click()
+		elif move == "Superpower":
+			driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='Rock'])[1]/following::button[1]").click()
+		else:
+			print ("Invalid Move!")
+	except:
+		driver.find_element_by_name("chooseMove").click()
+	time.sleep(1)
 
 def play_game(browser):
 	browser.find_element_by_xpath("//*[@id=\"room-\"]/div/div[1]/div[2]/div[1]/form/p[1]/button").click() # select battle type
