@@ -11,7 +11,7 @@ import torch
 import numpy as np
 import random
 
-username = "UndefeatableNNB2"
+username = "UndefeatableNN"
 password = "feedforward"
 
 # Looks for word in logs
@@ -77,7 +77,8 @@ def main():
 	play_game(browser)
 	create_team(browser)
 
-
+	browser.find_element_by_name("format").click()
+	start_battle(browser)
 	for i in range(100):
 		f = open(username + '.csv', 'a')
 		f.write(str(i) + ',')
@@ -106,7 +107,7 @@ def main():
 					move_index = torch.argmax(output)
 					print(output)
 					move = moves[move_index]
-					# move = random.choice(moves) # For random moves
+					move = random.choice(moves) # For random moves
 				continue
 
 			# Wait for chooseMove to come up
@@ -156,7 +157,7 @@ def get_chromedriver_path():
 		username = getpass.getuser()
 		return("/Users/" + username + "/PycharmProjects/chromedriver_win32")
 	if your_os == "nt":
-		return ("C:/Users/martyn wei/PycharmProjects/chromedriver_win32/chromedriver")
+		return ("C:/Users/rober/PycharmProjects/ece324/chromedriver_win32/chromedriver")
 
 # Enters Pokemon Showdown Website
 def open_pokemon_showdown(browser):
@@ -194,15 +195,18 @@ def create_team(driver):
 	driver.find_element_by_xpath(
 		"(.//*[normalize-space(text()) and normalize-space(.)='Format:'])[2]/following::button[1]").click()
 	driver.find_element_by_xpath(
-		"(.//*[normalize-space(text()) and normalize-space(.)='Anything Goes'])[2]/following::button[1]").click()
+		"/html/body/div[5]/ul[3]/li[22]/button").click()
 	driver.find_element_by_xpath(
 		"(.//*[normalize-space(text()) and normalize-space(.)='Home'])[1]/preceding::i[1]").click()
 
 # Starts battle and chooses Haxorus
 def start_battle(driver):
-	driver.find_element_by_name("format").click()
 	driver.find_element_by_xpath(
-		"(.//*[normalize-space(text()) and normalize-space(.)='Anything Goes'])[2]/following::button[1]").click()
+		"/html/body/div[5]/ul[3]/li[22]/button").click()
+	driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div[2]/div[1]/form/p[3]/button"
+								 ).click()
+	#driver.find_element_by_xpath(
+	#	"(.//*[normalize-space(text()) and normalize-space(.)='Anything Goes'])[2]/following::button[1]").click()
 	time.sleep(1)
 	driver.find_element_by_xpath(
 		"(.//*[normalize-space(text()) and normalize-space(.)='wobbuffet'])[1]/following::strong[1]").click()
