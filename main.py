@@ -76,9 +76,6 @@ def main():
 	login(browser, username, password)
 	play_game(browser)
 	create_team(browser)
-
-	browser.find_element_by_name("format").click()
-	start_battle(browser)
 	for i in range(100):
 		f = open(username + '.csv', 'a')
 		f.write(str(i) + ',')
@@ -201,10 +198,10 @@ def create_team(driver):
 
 # Starts battle and chooses Haxorus
 def start_battle(driver):
-	driver.find_element_by_xpath(
-		"/html/body/div[5]/ul[3]/li[22]/button").click()
-	driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div[2]/div[1]/form/p[3]/button"
-								 ).click()
+	time.sleep(5)
+	driver.find_element_by_css_selector(".button.mainmenu1.big")
+	#driver.find_element_by_xpath(
+	#	"/html/body/div[2]/div/div[1]/div[2]/div[2]/form/p[3]/button").click()
 	#driver.find_element_by_xpath(
 	#	"(.//*[normalize-space(text()) and normalize-space(.)='Anything Goes'])[2]/following::button[1]").click()
 	time.sleep(1)
@@ -235,7 +232,7 @@ def make_move(driver, move):
 def play_game(browser):
 	browser.find_element_by_xpath("//*[@id=\"room-\"]/div/div[1]/div[2]/div[1]/form/p[1]/button").click() # select battle type
 	# time.sleep(2)
-	browser.find_element_by_xpath("/html/body/div[4]/ul[1]/li[14]/button").click() # choose 1v1
+	browser.find_element_by_xpath("/html/body/div[4]/ul[3]/li[22]/button").click() # choose 1v1
 	# time.sleep(2)
 
 if __name__ == "__main__":
