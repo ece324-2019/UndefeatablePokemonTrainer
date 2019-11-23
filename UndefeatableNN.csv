@@ -166,3 +166,107 @@ Battle, Opponent, Move
 97,Kartana,Iron Tail,Iron Tail,Iron Tail,loss
 98,Aegislash,Superpower,loss
 99,Kartana,Superpower,Superpower,loss
+
+Battle, Opponent, Move
+
+Battle, Opponent, Move
+0,Lucario,Superpower,win
+1,Garchomp,Superpower,loss
+2,Venusaur,Iron Tail,Iron Tail,Iron Tail,Iron Tail,loss
+3,Excadrill,Iron Tail,Iron Tail,loss
+4,Blaziken,Rock Slide,Rock Slide,Rock Slide,Rock Slide,loss
+5,Aegislash,Outrage,loss
+6,Gardevoir,Rock Slide,Rock Slide,loss
+7,Venusaur,Superpower,Superpower,Superpower,Superpower,Superpower,loss
+8,Gardevoir,Rock Slide,Rock Slide,loss
+9,Blastoise,Superpower,loss
+10,Gardevoir,Outrage,loss
+11,Blastoise,Iron Tail,loss
+12,Gliscor,Iron Tail,Iron Tail,Iron Tail,win
+13,Porygon-Z,Outrage,loss
+14,Gardevoir,Iron Tail,loss
+15,Aegislash,Iron Tail,loss
+16,Porygon-Z,Iron Tail,loss
+17,Lopunny,Rock Slide,Rock Slide,Rock Slide,loss
+18,Blastoise,Rock Slide,loss
+19,Lopunny,Superpower,Superpower,win
+20,Venusaur,Superpower,Superpower,Superpower,Superpower,Superpower,Superpower,loss
+21,Gardevoir,Superpower,loss
+22,Lopunny,Iron Tail,Iron Tail,loss
+23,Gardevoir,Rock Slide,loss
+24,Venusaur,Outrage,Outrage,Outrage,Outrage,Outrage,loss
+25,Aegislash,Outrage,loss
+26,Muk,Superpower,Superpower,Superpower,Superpower,Superpower,Superpower,Superpower,Superpower,Superpower,Superpower,loss
+27,Gliscor,Rock Slide,Rock Slide,loss
+28,Samurott,Outrage,Outrage,win
+29,Lucario,Superpower,win
+30,Alakazam,Rock Slide,loss
+31,Slurpuff,Outrage,Outrage,loss
+32,Aegislash,Rock Slide,loss
+33,Gliscor,Superpower,Superpower,loss
+34,Persian,Outrage,Outrage,win
+35,Gliscor,Iron Tail,Iron Tail,loss
+36,Slurpuff,Outrage,Outrage,Outrage,loss
+37,Medicham,Outrage,Outrage,win
+38,Slurpuff,Rock Slide,Rock Slide,Rock Slide,Rock Slide,loss
+39,Sceptile,Rock Slide,Rock Slide,loss
+40,Primarina,Outrage,loss
+41,Blacephalon,Superpower,loss
+42,Mew,Iron Tail,Iron Tail,loss
+43,Smeargle,Outrage,win
+44,Smeargle,Rock Slide,Rock Slide,Rock Slide,Rock Slide,Rock Slide,loss
+45,Smeargle,Rock Slide,Rock Slide,Rock Slide,win
+46,Gliscor,Outrage,Outrage,Outrage,Outrage,Outrage,loss
+47,Crobat,Superpower,Superpower,Superpower,loss
+48,Charizard,Iron Tail,Iron Tail,loss
+49,Greninja,Iron Tail,Iron Tail,win
+50,Tapu Bulu,Superpower,loss
+51,Smeargle,Iron Tail,win
+52,Ninjask,Superpower,Superpower,Superpower,loss
+53,Tapu Bulu,Rock Slide,Rock Slide,Rock Slide,Rock Slide,Rock Slide,Rock Slide,loss
+54,Dragonite,Rock Slide,Rock Slide,win
+55,Tapu Bulu,Superpower,loss
+56,Nidoqueen,Iron Tail,loss
+57,Tapu Fini,Superpower,loss
+58,Nidoqueen,Rock Slide,loss
+59,Tapu Fini,Rock Slide,Rock Slide,loss
+60,Whimsicott,Superpower,Superpower,Superpower,Superpower,Superpower,Superpower,Superpower,Superpower,Superpower,Superpower,Superpower,loss
+61,Nidoqueen,Superpower,loss
+62,Ninjask,Superpower,Superpower,Superpower,Superpower,Superpower,loss
+63,Gyarados,Outrage,loss
+64,Ninjask,Iron Tail,Iron Tail,Iron Tail,Iron Tail,loss
+65,Gyarados,Superpower,loss
+66,Ninjask,Iron Tail,Iron Tail,Iron Tail,Iron Tail,Iron Tail,loss
+67,Gyarados,Iron Tail,loss
+68,Ninjask,Iron Tail,Iron Tail,Iron Tail,Iron Tail,Iron Tail,Iron Tail,Iron Tail,Iron Tail,loss
+69,Gyarados,Superpower,loss
+70,Aegislash,Rock Slide,Rock Slide,Rock Slide,Rock Slide,loss
+71,Ninjask,Superpower,Superpower,Superpower,loss
+72,Beedrill,Superpower,loss
+73,Gyarados,Outrage,Outrage,win
+74,Nidoqueen,Iron Tail,loss
+75,Xurkitree,Superpower,Superpower,win
+76,Shuckle,Outrage,Outrage,Outrage,Outrage,win
+77,Gyarados,Outrage,loss
+78,Aegislash,Superpower,Superpower,Superpower,Superpower,Superpower,Superpower,Superpower,Superpower,Superpower,Superpower,Superpower,loss
+79,Tyranitar,Outrage,Outrage,win
+80,Gyarados,Outrage,loss
+81,Arcanine,Iron Tail,Iron Tail,loss
+82,Tyranitar,Iron Tail,Iron Tail,loss
+83,Whimsicott,Rock Slide,Rock Slide,Rock Slide,Rock Slide,Rock Slide,Rock Slide,Rock Slide,Rock Slide,Rock Slide,Rock Slide,Rock Slide,Rock Slide,loss
+84,Gyarados,Superpower,loss
+85,Jirachi,Rock Slide,Rock Slide,Rock Slide,loss
+86,Venusaur,Rock Slide,Rock Slide,Rock Slide,Rock Slide,Rock Slide,Rock Slide,Rock Slide,Rock Slide,loss
+87,Whimsicott,Outrage,Outrage,Outrage,Outrage,Outrage,Outrage,Outrage,Outrage,Outrage,loss
+88,Venusaur,Rock Slide,Rock Slide,Rock Slide,Rock Slide,Rock Slide,Rock Slide,loss
+89,Unown,Superpower,Superpower,win
+90,Aron,Rock Slide,win
+91,Tyranitar,Rock Slide,Rock Slide,Rock Slide,Rock Slide,Rock Slide,win
+92,Venusaur,Outrage,Outrage,Outrage,Outrage,Outrage,loss
+93,Typhlosion,Superpower,Superpower,loss
+94,Venusaur,Rock Slide,Rock Slide,Rock Slide,Rock Slide,Rock Slide,Rock Slide,Rock Slide,Rock Slide,loss
+95,Greninja,Iron Tail,Iron Tail,Iron Tail,loss
+96,Primeape,Outrage,win
+97,Lopunny,Outrage,Outrage,win
+98,Gyarados,Rock Slide,Rock Slide,Rock Slide,Rock Slide,loss
+99,Cloyster,Outrage,loss
