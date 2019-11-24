@@ -1,32 +1,8 @@
-
-Battle, Opponent, Move
 0,Clefable,Iron Tail,Iron Tail,loss
-1,
-Battle, Opponent, Move
 0,Hitmonlee,Rock Slide,Rock Slide,loss
-1,
-Battle, Opponent, Move
 0,Charizard,Rock Slide,loss
-1,
-Battle, Opponent, Move
-0,
-Battle, Opponent, Move
 0,Lucario,Rock Slide,Rock Slide,Rock Slide,loss
-1,
-Battle, Opponent, Move
 0,Charizard,Rock Slide,loss
-1,
-Battle, Opponent, Move
-0,
-Battle, Opponent, Move
-0,
-Battle, Opponent, Move
-0,
-Battle, Opponent, Move
-0,
-Battle, Opponent, Move
-0,
-Battle, Opponent, Move
 0,Venusaur,Rock Slide,Rock Slide,Rock Slide,loss
 1,Venusaur,Rock Slide,Rock Slide,Rock Slide,Rock Slide,Rock Slide,Rock Slide,loss
 2,Kommo-o,Rock Slide,loss
@@ -64,17 +40,13 @@ Battle, Opponent, Move
 34,Emolga,Outrage,win
 35,Gardevoir,Outrage,loss
 36,Ninetales,Rock Slide,Rock Slide,win
-37,Vivillon-Marine,
-Battle, Opponent, Move
 0,Landorus-Therian,Superpower,loss
 1,Bastiodon,Outrage,Outrage,Outrage,Outrage,Outrage,loss
-2,win
 3,Kommo-o,Iron Tail,loss
 4,Tapu Lele,Iron Tail,loss
 5,Volcanion,Rock Slide,Rock Slide,loss
 6,Gyarados,Superpower,win
 7,Volcanion,Rock Slide,Rock Slide,Rock Slide,loss
-8,win
 9,Cresselia,Rock Slide,Rock Slide,Rock Slide,Rock Slide,Rock Slide,Rock Slide,loss
 10,Medicham,Outrage,win
 11,Zapdos,Rock Slide,Rock Slide,Rock Slide,win
@@ -166,10 +138,6 @@ Battle, Opponent, Move
 97,Kartana,Iron Tail,Iron Tail,Iron Tail,loss
 98,Aegislash,Superpower,loss
 99,Kartana,Superpower,Superpower,loss
-
-Battle, Opponent, Move
-
-Battle, Opponent, Move
 0,Lucario,Superpower,win
 1,Garchomp,Superpower,loss
 2,Venusaur,Iron Tail,Iron Tail,Iron Tail,Iron Tail,loss
