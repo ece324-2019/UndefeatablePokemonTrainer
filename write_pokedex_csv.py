@@ -56,14 +56,14 @@ with open('pokedex.csv', 'w') as csvFile:
 	writer = csv.writer(csvFile)
 	writer.writerows(csvData)
 csvFile.close()
-print(csvData)
+'''print(csvData)
 print(type1)
 print(type2)
 print(hp)
 print(atk)
 print(defe)
 print(spa)
-print(spd)
+print(spd)'''
 '''
 print(len(types))
 print(len(hp))
@@ -76,5 +76,5 @@ print(len(type2))
 #print(baseStats)'''
 file.close()
 
-
-
+def get_species():
+	return(species)
